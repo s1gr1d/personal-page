@@ -1,24 +1,84 @@
-import Head from "next/head";
-import Layout, { siteTitle } from "../components/layout";
-import utilStyles from "../styles/utils.module.css";
+import styled from "styled-components";
+import { IconLink } from "../components/iconLink";
+import { ArrowLink, Variant } from "../components/arrowLink";
+import { AiFillMediumCircle, AiFillGithub } from "react-icons/ai";
+import React from "react";
 
-export default function Home() {
+const Background = styled.div`
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: ${({ theme }) => theme.colors.background};
+`;
+
+const WelcomingText = styled.p`
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  font-size: 40px;
+  font-family: ${({ theme }) => theme.typography.primaryFont};
+  color: ${({ theme }) => theme.colors.text};
+`;
+const AboutMeLink = styled(ArrowLink)`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  margin-left: 2em;
+  margin-bottom: 3em;
+
+  @media (max-width: 650px) {
+    margin-bottom: 8em;
+  }
+`;
+
+const MyWorkLink = styled(ArrowLink)`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  margin-right: 2em;
+  margin-bottom: 3em;
+`;
+
+const LinkWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 2em;
+  height: 5.5em;
+`;
+
+const Index = () => {
   return (
-    <Layout home>
-      <Head>
-        <title>{siteTitle}</title>
-      </Head>
-      <section className={utilStyles.headingMd}>
-        <p>[Your Self Introduction]</p>
-        <p>
-          (This is a sample website - you’ll be building a site like this in{" "}
-          <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
-        </p>
-      </section>
-      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>Blog</h2>
-      </section>
-    </Layout>
+    <>
+      <Background />
+      <WelcomingText>{"hello, i am sigrid"}</WelcomingText>
+      <AboutMeLink href="/about" variant={Variant.LEFT}>
+        {"me and my journey"}
+      </AboutMeLink>
+      <MyWorkLink href="/work" variant={Variant.RIGHT}>
+        {"my work"}
+      </MyWorkLink>
+      <LinkWrapper>
+        <IconLink url={"https://github.com/s1gr1d"} icon={AiFillGithub}>
+          {"GitHub"}
+        </IconLink>
+        <IconLink url={"https://medium.com/@s1gr1d"} icon={AiFillMediumCircle}>
+          {"Blog"}
+        </IconLink>
+      </LinkWrapper>
+    </>
   );
-}
+};
 
+export default Index;
