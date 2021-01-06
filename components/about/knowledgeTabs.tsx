@@ -53,8 +53,8 @@ const Checkpoints = ({
 }) => {
   return (
     <>
-      {children.map((child) => (
-        <StyledListItem className={className}>
+      {children.map((child, idx) => (
+        <StyledListItem className={className} key={`checkpoint-${idx}`}>
           <FiCheckCircle />
           <p>{child}</p>
         </StyledListItem>

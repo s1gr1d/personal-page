@@ -1,10 +1,13 @@
+import React from "react";
 import { AppProps } from "next/app";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { darkTheme } from "../styles/utils";
-import React from "react";
+import {Theme} from "../lib/types";
+
 import "../styles/fonts.css";
 
-const GlobalStyle = createGlobalStyle`
+
+const GlobalStyle = createGlobalStyle<{theme: Theme}>`
   *,
   *::before,
   *::after {
@@ -20,7 +23,6 @@ const GlobalStyle = createGlobalStyle`
 
   html,
   body {
-   
     font-family: ${({ theme }) => theme.typography.secondaryFont};
     line-height: 1.6;
     font-size: 18px;
