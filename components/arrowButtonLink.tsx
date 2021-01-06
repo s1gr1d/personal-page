@@ -1,5 +1,4 @@
 import React from "react";
-import { ReactComponent as ArrowRight } from "../assets/arrowRight.svg";
 import styled, { css } from "styled-components";
 import { DelayLink } from "./delayLink";
 import { switchCase } from "../lib/fp";
@@ -30,8 +29,44 @@ const switchRotation = switchCase({
 `);
 
 const Rotate = styled.div<{ variant: Variant }>`
+  display: flex;
   ${({ variant }) => switchRotation(variant)};
 `;
+
+const ArrowRight = ({ className }: { className?: string }) => (
+  <svg
+    className={className}
+    width="50"
+    height="50"
+    viewBox="0 0 200 200"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g clip-path="url(#clip0)">
+      <rect
+        x="3.5"
+        y="3.5"
+        width="193"
+        height="193"
+        rx="96.5"
+        stroke="white"
+        stroke-width="7"
+      />
+      <path
+        d="M78 157L134.567 100.92C135.357 100.138 135.357 98.8621 134.567 98.0797L78 42"
+        stroke="white"
+        stroke-width="7"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </g>
+    <defs>
+      <clipPath id="clip0">
+        <rect width="200" height="200" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+);
 
 const StyledArrow = styled(ArrowRight)`
   cursor: pointer;
@@ -57,6 +92,7 @@ const StyledArrow = styled(ArrowRight)`
 
 const LinkText = styled.div`
   /* TODO : link font */
+  color: ${({ theme }) => theme.colors.text};
   margin-right: 1rem;
 `;
 
@@ -67,14 +103,12 @@ const StyledDelayLink = styled(DelayLink)`
 `;
 
 type ArrowButtonLinkProps = ComponentUtilProps & {
-  onClick: () => void;
   variant: Variant;
   href: string;
-  children: string;
+  children?: string;
 };
 
 export const ArrowButtonLink = ({
-  onClick,
   variant,
   href,
   children,
@@ -82,9 +116,9 @@ export const ArrowButtonLink = ({
 }: ArrowButtonLinkProps) => {
   return (
     <StyledDelayLink href={href} delay={300} className={className}>
-      <LinkText onClick={onClick}>{children}</LinkText>
+      <LinkText>{children}</LinkText>
       <Rotate variant={variant}>
-        <StyledArrow onClick={onClick} />
+        <StyledArrow />
       </Rotate>
     </StyledDelayLink>
   );

@@ -1,62 +1,42 @@
 import styled from "styled-components";
 import { WithChildren } from "../../lib/types";
 
-
-
 export enum MaxMainWidth {
-  XS = "450px",
   M = "900px",
-  L = "1180px",
-  XL = "1420px",
 }
 
 export enum MinSideMargin {
   M = "40px",
 }
 
-export enum Spacing {
-  NONE = "0px",
-  XS = "20px",
-  S = "50px",
-  M = "80px",
-  L = "100px",
-}
-
-type GridSectionContainerProps = WithChildren<{
+type GridContainerProps = WithChildren<{
   overflowHidden?: boolean;
   maxMainWidth?: MaxMainWidth;
   minSideMargin?: MinSideMargin;
-  spacingTop?: Spacing;
-  spacingBottom?: Spacing;
 }>;
 
-const GridContainer = styled.section<GridSectionContainerProps>`
+const StyledGridContainer = styled.section<GridContainerProps>`
   display: grid;
-  grid-template-columns: ${({ minSideMargin, maxMainWidth }) =>
+  column-gap: 20px;
+  grid-template-columns: ${({ minSideMargin }) =>
     `[full-start] minmax(${minSideMargin}, 1fr)
-    [main-start] minmax(min-content, ${maxMainWidth})
+    [main-start] repeat(12, [col] 80px [col-end])
     [main-end] minmax(${minSideMargin}, 1fr)
     [full-end];`};
-  padding: ${({ spacingTop, spacingBottom }) =>
-    `${spacingTop ? spacingTop : 0} ${0} ${spacingBottom ? spacingBottom : 0}`};
-  overflow: ${({ overflowHidden }) => (overflowHidden ? "hidden" : "visible")};
 `;
 
-export const GridSectionContainer = ({
+export const GridContainer = ({
   children,
   maxMainWidth = MaxMainWidth.M,
   minSideMargin = MinSideMargin.M,
-  spacingTop = Spacing.NONE,
-  spacingBottom = Spacing.NONE,
+
   overflowHidden = true,
-}: GridSectionContainerProps) => (
-  <GridContainer
+}: GridContainerProps) => (
+  <StyledGridContainer
     overflowHidden={overflowHidden}
     maxMainWidth={maxMainWidth}
     minSideMargin={minSideMargin}
-    spacingTop={spacingTop}
-    spacingBottom={spacingBottom}
   >
     {children}
-  </GridContainer>
+  </StyledGridContainer>
 );

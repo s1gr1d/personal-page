@@ -41,6 +41,7 @@ export default class StyledDocument extends Document<{ styleTags: any }> {
         <Head>
           {this.props.styleTags}
           <link rel="shortcut icon" href="/favicon/favicon.ico" />
+
         </Head>
         <body>
           <Main />

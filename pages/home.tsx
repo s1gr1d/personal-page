@@ -57,6 +57,7 @@ const LinkWrapper = styled.div`
   margin: 2em;
   height: 5.5em;
 `;
+
 const Home = () => {
   return (
     <>

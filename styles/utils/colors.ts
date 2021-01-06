@@ -6,8 +6,8 @@ export const black = {
 
 export const white = {
   100: "#ffffff",
-  200: "#f4f5f7",
-  300: "#e1e1e1",
+  200: "#F2F2F2",
+  300: "#BDBDBD",
 };
 
 export const gold = {

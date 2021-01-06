@@ -7,6 +7,7 @@ export const darkTheme: Theme = {
   colors: {
     background: black[300],
     text: white[200],
+    textDark: white[300],
     accent: gold[200],
   },
   typography: {

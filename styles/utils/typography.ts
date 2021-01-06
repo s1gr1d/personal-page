@@ -1,7 +1,6 @@
 export const primaryFont = '"Unica One", monospace';
 
-export const secondaryFont =
-  '"Karla", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif  sans-serif';
+export const secondaryFont = "Karla,  -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif";
 
 export const typeScale = {
   header1: "1.8rem",
