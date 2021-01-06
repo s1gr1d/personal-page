@@ -81,8 +81,8 @@ const WorkCard = () => {
       <StyledCheckpoints>
         {[
           "Improved the UX (user experience) of the internal sports course calendar through a redesign, driven by conducting user research and user testing.",
-          "Designed and implemented a data insights dashboard to display client ratings with React and Redux.",
-          "Initiated a project for developing a Design System",
+          "Designed and implemented a data insights dashboard with React and Redux to display client ratings.",
+          "Initiated a project for developing a Design System.",
         ]}
       </StyledCheckpoints>
     </StyledCard>
