@@ -36,7 +36,7 @@ const Header = () => {
     <StyledGrid>
       <Title>{"every coder has their journey."}</Title>
       <Subtitle>{"This is mine."}</Subtitle>
-      <BackButton variant={Variant.RIGHT} href="/home">
+      <BackButton variant={Variant.RIGHT} href="/">
         {"Back"}
       </BackButton>
     </StyledGrid>
@@ -47,6 +47,7 @@ const Header = () => {
 import Image from "next/image";
 import { ArrowLinkDown } from "../components/arrowLinkDown";
 import { KnowledgeTabs } from "../components/about/knowledgeTabs";
+import { scrollToRef } from "../lib/scrollTo";
 
 const TextWrapper = styled.div`
   grid-column: col 6 / col 10;
@@ -90,7 +91,7 @@ const AboutMe = () => {
         <br />
         <p>{"But all this is just a part of who I am."}</p>
       </TextWrapper>
-      <LeadingDownArrow href="#knowledge" />
+      <LeadingDownArrow href="#knowledge" onClick={scrollToRef("#knowledge")} />
     </StyledGrid>
   );
 };

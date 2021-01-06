@@ -73,7 +73,7 @@ export const ArrowLinkDown = ({
   return (
     <StyledDelayLink
       href={href}
-      delay={0}
+      delay={700}
       onDelayStart={onClick}
       className={className}
     >

@@ -1,9 +1,16 @@
-import React from "react";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import React, { useState } from "react";
+import { TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 import { TwelveColumnGrid } from "../layout/cssGrid";
 import { FiCheckCircle } from "react-icons/fi";
+import {
+  StyledTab,
+  StyledTabs,
+  StyledTabList,
+  AnimatedUnderline,
+} from "../tabs";
+import { switchCase } from "../../lib/fp";
 
 const StyledCard = styled.div`
   grid-column: col 3 / col 11;
@@ -87,28 +94,47 @@ const StyledGrid = styled(TwelveColumnGrid)`
   align-items: start;
 `;
 
-export const KnowledgeTabs = () => {
-  return (
-    <section style={{ height: "1000px" }} id={"knowledge"}>
-      <Tabs>
-        <TabList>
-          <Tab>Title 1</Tab>
-          <Tab>Title 2</Tab>
-          <Tab>Title 2</Tab>
-        </TabList>
+const decideWidth = switchCase({
+  [0]: "12.5%",
+  [1]: "34.5%",
+  [2]: "20.6%",
+})("15%");
 
+const decideMargin = switchCase({
+  [0]: "1.2%",
+  [1]: "28.5%",
+  [2]: "77.8%",
+})("15%");
+
+export const KnowledgeTabs = () => {
+  const [currSelected, setCurrSelected] = useState(0);
+  return (
+    <TwelveColumnGrid style={{ height: "1000px" }} id={"knowledge"}>
+      <StyledTabs
+        selectedIndex={currSelected}
+        onSelect={(selectedIndex) => setCurrSelected(selectedIndex)}
+      >
+        <StyledTabList>
+          <StyledTab>{"Skills"}</StyledTab>
+          <StyledTab>{"Work Experience"}</StyledTab>
+          <StyledTab>{"Education"}</StyledTab>
+        </StyledTabList>
+        <AnimatedUnderline
+          width={decideWidth(currSelected)}
+          marginLeft={decideMargin(currSelected)}
+        />
+        <TabPanel>
+          <h2>TODO</h2>
+        </TabPanel>
         <TabPanel>
           <StyledGrid>
             <WorkCard />
           </StyledGrid>
         </TabPanel>
         <TabPanel>
-          <h2>Any content 2</h2>
+          <h2>TODO</h2>
         </TabPanel>
-        <TabPanel>
-          <h2>Any content 2</h2>
-        </TabPanel>
-      </Tabs>
-    </section>
+      </StyledTabs>
+    </TwelveColumnGrid>
   );
 };
