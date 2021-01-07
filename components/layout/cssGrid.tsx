@@ -5,7 +5,7 @@ export const TwelveColumnGrid = styled.section`
   column-gap: 20px;
   grid-template-columns:
     [full-start] 1fr
-    [main-start] repeat(12, [col] minmax(min-content,80px) [col-end])
+    [main-start] repeat(12, [col] minmax(auto,80px) [col-end])
     [main-end] 1fr
     [full-end];
 `;

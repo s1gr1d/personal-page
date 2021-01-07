@@ -11,40 +11,27 @@ import {
   AnimatedUnderline,
 } from "../tabs";
 import { switchCase } from "../../lib/fp";
+import { Card } from "./card";
+import { Carousel } from "../carousel";
 
-const StyledCard = styled.div`
-  grid-column: col 3 / col 11;
-  display: grid;
-  grid-template-columns: minmax(min-content, 2fr) minmax(min-content, 1fr);
-  grid-template-rows: 1fr 1fr;
-  gap: 0.5em;
-  
-  padding: 2em 3.5em;
-  border-radius: 3px;
-  border: 2px solid  ${({ theme }) => theme.colors.text};
-  background-color: ${({ theme }) => theme.colors.background};
-  color: ${({ theme }) => theme.colors.text};
-  );
-`;
+const decideWidth = switchCase({
+  [0]: "12.5%",
+  [1]: "34.5%",
+  [2]: "20.6%",
+})("15%");
 
-const StyledDate = styled.p`
-  text-align: right;
-  font-weight: bold;
-  font-size: 25px;
-`;
-
-const StyledTitle = styled.p`
-  font-size: 25px;
-  white-space: pre;
-  font-weight: bold;
-  margin-bottom: 1em;
-`;
+const decideMargin = switchCase({
+  [0]: "1.2%",
+  [1]: "28.5%",
+  [2]: "77.8%",
+})("15%");
 
 const StyledListItem = styled.div`
   display: grid;
   grid-template-columns: min-content 1fr;
-  gap: 1rem;
+  column-gap: 1rem;
   margin-right: 1.5rem;
+  margin-bottom: 1rem;
 
   & svg {
     margin-top: 5px;
@@ -70,46 +57,115 @@ const Checkpoints = ({
   );
 };
 
-const StyledCheckpoints = styled(Checkpoints)`
-  grid-column: 1 / -1;
+const StyledGrid = styled.div`
+  display: grid;
+  column-gap: 20px;
+  grid-template-columns: 1fr 10fr 1fr;
+  grid-template-areas: ". card .";
+
+  height: 100%;
+  align-content: center;
+
+  padding: 50px 0;
+  align-items: start;
 `;
-const WorkCard = () => {
-  return (
-    <StyledCard>
-      <StyledTitle>{"Frontend Software Engineer \nat myClubs"}</StyledTitle>
-      <StyledDate>{"03.2019 - now"}</StyledDate>
-      <StyledCheckpoints>
+
+const WorkExperience = () => (
+  <StyledGrid>
+    <Card
+      title={"Frontend Software Engineer \nat myClubs"}
+      titleRight={"03.2019 - now"}
+    >
+      <Checkpoints>
         {[
           "Improved the UX (user experience) of the internal sports course calendar through a redesign, driven by conducting user research and user testing.",
           "Designed and implemented a data insights dashboard with React and Redux to display client ratings.",
           "Initiated a project for developing a Design System.",
         ]}
-      </StyledCheckpoints>
-    </StyledCard>
-  );
-};
+      </Checkpoints>
+    </Card>
+  </StyledGrid>
+);
 
-const StyledGrid = styled(TwelveColumnGrid)`
-  padding-top: 100px;
-  align-items: start;
-`;
-
-const decideWidth = switchCase({
-  [0]: "12.5%",
-  [1]: "34.5%",
-  [2]: "20.6%",
-})("15%");
-
-const decideMargin = switchCase({
-  [0]: "1.2%",
-  [1]: "28.5%",
-  [2]: "77.8%",
-})("15%");
+const Skills = () => (
+  <Carousel isIntrinsicHeight infinite>
+    {[
+      <StyledGrid key={"skill-carousel-1"}>
+        <Card title={"Frontend Software Engineering"}>
+          <>
+            <p>
+              {
+                "I built my first website with simple HTML over 10 years ago. I was always fascinated by how you can immediately see what you are building."
+              }
+            </p>
+            <br />
+            <p>
+              {
+                "By now, I have over 2 years of professional experience in building "
+              }
+              <b>{"frontend applications with React and Redux."}</b>
+            </p>
+            <br />
+            <p>
+              {"My languages of choice are "}
+              <b>{"JavaScript and TypeScript"}</b>
+              {
+                " (having a type system it is so refreshing) and I love to write (and read)"
+              }
+              <b>{" clean code"}</b>
+              {"and having a"}
+              <b>{" maintainable software architecture."}</b>
+            </p>
+            <br />
+            <p>
+              {
+                "In my free-time I love to experiment with diffent technologies like "
+              }
+              <b>{"Functional Programming with Elm "}</b>
+              {"or building 3D experiences with "}
+              <b>{"Three.js"}</b>
+              {" (preferably with the react-three-fiber renderer)."}
+            </p>
+          </>
+        </Card>
+      </StyledGrid>,
+      <StyledGrid key={"skill-carousel-2"}>
+        <Card title={"User Experience (UX) Design"}>
+          <>
+            <p>
+              {"In order to create a functional website, "}
+              <b>{"users can not be excluded from this process."}</b>
+            </p>
+            <br />
+            <p>
+              {"For me, Design means "}
+              <b>{"finding the perfect solution to a problem. "}</b>
+              {
+                "Design provides orientation without having to explain much. It should be fun to use an application. But this fun and beauty of a Design should also be meaningful and "
+              }
+              <b>{"serve the purpose and not be purely artistic."}</b>
+            </p>
+            <br />
+            <p>
+              {
+                "Our society is shaped by the way the things that surround us are designed. "
+              }
+              <b>{"Design transports values and ideas "}</b>
+              {
+                " and I strongly believe that it can help to contribute to a better society."
+              }
+            </p>
+          </>
+        </Card>
+      </StyledGrid>,
+    ]}
+  </Carousel>
+);
 
 export const KnowledgeTabs = () => {
   const [currSelected, setCurrSelected] = useState(0);
   return (
-    <TwelveColumnGrid style={{ height: "1000px" }} id={"knowledge"}>
+    <TwelveColumnGrid id={"knowledge"}>
       <StyledTabs
         selectedIndex={currSelected}
         onSelect={(selectedIndex) => setCurrSelected(selectedIndex)}
@@ -124,12 +180,10 @@ export const KnowledgeTabs = () => {
           marginLeft={decideMargin(currSelected)}
         />
         <TabPanel>
-          <h2>TODO</h2>
+          <Skills />
         </TabPanel>
         <TabPanel>
-          <StyledGrid>
-            <WorkCard />
-          </StyledGrid>
+          <WorkExperience />
         </TabPanel>
         <TabPanel>
           <h2>TODO</h2>

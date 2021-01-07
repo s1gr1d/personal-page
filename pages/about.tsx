@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { TwelveColumnGrid } from "../components/layout/cssGrid";
-import { ArrowButtonLink, Variant } from "../components/arrowButtonLink";
+import { ArrowButtonLink } from "../components/arrowButtonLink";
+import { Variant } from "../components/buttons/animatedArrowSVG";
 
 /// #########
 const Title = styled.h1`
