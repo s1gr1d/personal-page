@@ -41,22 +41,11 @@ const ArrowRight = ({ className }: { className?: string }) => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <g clip-path="url(#clip0)">
-      <rect
-        x="3.5"
-        y="3.5"
-        width="193"
-        height="193"
-        rx="96.5"
-        stroke="white"
-        stroke-width="7"
-      />
+    <g>
+      <rect x="3.5" y="3.5" width="193" height="193" rx="96.5" stroke="white" />
       <path
         d="M78 157L134.567 100.92C135.357 100.138 135.357 98.8621 134.567 98.0797L78 42"
         stroke="white"
-        stroke-width="7"
-        stroke-linecap="round"
-        stroke-linejoin="round"
       />
     </g>
     <defs>
@@ -71,9 +60,20 @@ const StyledArrow = styled(ArrowRight)`
   cursor: pointer;
   width: 40px;
   height: 40px;
-
   transition: transform cubic-bezier(0.65, 0.05, 0.36, 1) 200ms;
 
+  & g {
+    clip-path: url(#clip0);
+    rect {
+      stroke-width: 7;
+    }
+    path {
+      stroke-width: 7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+  }
+  
   &:hover {
     transform: scale(1.3);
     fill: ${({ theme }) => theme.colors.text};

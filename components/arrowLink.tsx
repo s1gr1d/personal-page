@@ -58,24 +58,22 @@ const StyledDelayLink = styled(DelayLink)<{ variant: Variant }>`
     width: 100%;
     height: 100%;
   }
-  & svg g line,
-  svg g polyline,
-  svg g circle {
+  g line,
+  g polyline {
     fill: none;
-    stroke: ${({ theme }) => theme.colors.text};
-  }
-  & svg g line,
-  svg g polyline {
     stroke-miterlimit: 10;
   }
-  & svg g circle {
+  g circle {
     display: block;
+    fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-dasharray: 200;
     stroke-dashoffset: 0;
+    stroke: ${({ theme }) => theme.colors.text};
     transition: stroke-dashoffset ease-out 0.5s;
   }
+
   &:hover svg g circle {
     stroke-dashoffset: 200;
   }
