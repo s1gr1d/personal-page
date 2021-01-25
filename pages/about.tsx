@@ -1,8 +1,20 @@
 import React from "react";
+import { GetStaticProps } from "next";
 import styled from "styled-components";
 import { TwelveColumnGrid } from "../components/layout/cssGrid";
 import { ArrowButtonLink } from "../components/arrowButtonLink";
 import { Variant } from "../components/buttons/animatedArrowSVG";
+import Image from "next/image";
+import { ArrowLinkDown } from "../components/arrowLinkDown";
+import { KnowledgeTabs } from "../components/about/knowledgeTabs";
+import { scrollToRef } from "../lib/scrollTo";
+import { Dir, getSortedEntries } from "../lib/mdData";
+import {
+  EducationMeta,
+  MarkdownData,
+  SkillMeta,
+  WorkMeta,
+} from "../lib/types/mdContent";
 
 /// #########
 const Title = styled.h1`
@@ -44,11 +56,6 @@ const Header = () => {
   );
 };
 /// #########
-
-import Image from "next/image";
-import { ArrowLinkDown } from "../components/arrowLinkDown";
-import { KnowledgeTabs } from "../components/about/knowledgeTabs";
-import { scrollToRef } from "../lib/scrollTo";
 
 const TextWrapper = styled.div`
   grid-column: col 6 / col 10;
@@ -103,15 +110,39 @@ const PageStyle = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
   color: ${({ theme }) => theme.colors.text};
 `;
-const About = () => {
+
+type AboutProps = {
+  workEntries: WorkMeta & MarkdownData;
+  skillEntries: SkillMeta & MarkdownData;
+  educationEntries: EducationMeta & MarkdownData;
+};
+const About = ({ workEntries, skillEntries, educationEntries }: AboutProps) => {
   return (
     <>
       <PageStyle />
       <Header />
       <AboutMe />
-      <KnowledgeTabs />
+      <KnowledgeTabs
+        workEntries={workEntries}
+        educationEntries={educationEntries}
+        skillEntries={skillEntries}
+      />
     </>
   );
 };
 
 export default About;
+
+export const getStaticProps: GetStaticProps = async () => {
+  const workEntries = await getSortedEntries(Dir.WORK);
+  const educationEntries = await getSortedEntries(Dir.EDU);
+
+  console.log("sorted", workEntries);
+
+  return {
+    props: {
+      workEntries,
+      educationEntries,
+    },
+  };
+};

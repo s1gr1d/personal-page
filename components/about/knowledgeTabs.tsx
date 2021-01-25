@@ -3,7 +3,6 @@ import { TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 import { TwelveColumnGrid } from "../layout/cssGrid";
-import { FiCheckCircle } from "react-icons/fi";
 import {
   StyledTab,
   StyledTabs,
@@ -13,6 +12,13 @@ import {
 import { switchCase } from "../../lib/fp";
 import { Card } from "./card";
 import { Carousel } from "../carousel";
+import {
+  EducationMeta,
+  MarkdownData,
+  SkillMeta,
+  WorkMeta,
+} from "../../lib/types/mdContent";
+import { Checkpoints } from "../checkpoints";
 
 const decideWidth = switchCase({
   [0]: "12.5%",
@@ -25,37 +31,6 @@ const decideMargin = switchCase({
   [1]: "28.5%",
   [2]: "77.8%",
 })("15%");
-
-const StyledListItem = styled.div`
-  display: grid;
-  grid-template-columns: min-content 1fr;
-  column-gap: 1rem;
-  margin-right: 1.5rem;
-  margin-bottom: 1rem;
-
-  & svg {
-    margin-top: 5px;
-    color: ${({ theme }) => theme.colors.accent};
-  }
-`;
-const Checkpoints = ({
-  children,
-  className,
-}: {
-  children: string[];
-  className?: string;
-}) => {
-  return (
-    <>
-      {children.map((child, idx) => (
-        <StyledListItem className={className} key={`checkpoint-${idx}`}>
-          <FiCheckCircle />
-          <p>{child}</p>
-        </StyledListItem>
-      ))}
-    </>
-  );
-};
 
 const StyledGrid = styled.div`
   display: grid;
@@ -70,24 +45,46 @@ const StyledGrid = styled.div`
   align-items: start;
 `;
 
-const WorkExperience = () => (
-  <StyledGrid>
-    <Card
-      title={"Frontend Software Engineer \nat myClubs"}
-      titleRight={"03.2019 - now"}
-    >
-      <Checkpoints>
-        {[
-          "Improved the UX (user experience) of the internal sports course calendar through a redesign, driven by conducting user research and user testing.",
-          "Designed and implemented a data insights dashboard with React and Redux to display client ratings.",
-          "Initiated a project for developing a Design System.",
-        ]}
-      </Checkpoints>
-    </Card>
-  </StyledGrid>
+const WorkExperience = ({
+  workEntries,
+}: {
+  workEntries: (WorkMeta & MarkdownData)[];
+}) => (
+  <Carousel isIntrinsicHeight infinite>
+    {[
+      <StyledGrid key={"item-1"}>
+        <Card
+          title={`${workEntries[0].position}\nat ${workEntries[0].company}`}
+          titleRight={workEntries[0].timePeriod}
+        >
+          <Checkpoints>
+            {[
+              "Improved the UX (user experience) of the internal sports course calendar through a redesign, driven by conducting user research and user testing.",
+              "Designed and implemented a data insights dashboard with React and Redux to display client ratings.",
+              "Initiated a project for developing a Design System.",
+            ]}
+          </Checkpoints>
+        </Card>
+      </StyledGrid>,
+      ...workEntries.map((entry, idx) => (
+        <StyledGrid key={`${entry.fileName}-${idx}`}>
+          <Card
+            title={`${entry.position}\nat ${entry.company}`}
+            titleRight={entry.timePeriod}
+          >
+            <div dangerouslySetInnerHTML={{ __html: entry.contentHtml }} />
+          </Card>
+        </StyledGrid>
+      )),
+    ]}
+  </Carousel>
 );
 
-const Skills = () => (
+const Skills = ({
+  skillEntries,
+}: {
+  skillEntries: (SkillMeta & MarkdownData)[];
+}) => (
   <Carousel isIntrinsicHeight infinite>
     {[
       <StyledGrid key={"skill-carousel-1"}>
@@ -162,7 +159,16 @@ const Skills = () => (
   </Carousel>
 );
 
-export const KnowledgeTabs = () => {
+type KnowledgeTabsProps = {
+  workEntries: (WorkMeta & MarkdownData)[];
+  skillEntries: (SkillMeta & MarkdownData)[];
+  educationEntries: (EducationMeta & MarkdownData)[];
+};
+export const KnowledgeTabs = ({
+  workEntries,
+  skillEntries,
+  educationEntries,
+}: KnowledgeTabsProps) => {
   const [currSelected, setCurrSelected] = useState(0);
   return (
     <TwelveColumnGrid id={"knowledge"}>
@@ -180,10 +186,10 @@ export const KnowledgeTabs = () => {
           marginLeft={decideMargin(currSelected)}
         />
         <TabPanel>
-          <Skills />
+          <Skills skillEntries={skillEntries} />
         </TabPanel>
         <TabPanel>
-          <WorkExperience />
+          <WorkExperience workEntries={workEntries} />
         </TabPanel>
         <TabPanel>
           <h2>TODO</h2>

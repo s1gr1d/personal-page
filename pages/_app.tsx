@@ -2,12 +2,13 @@ import React from "react";
 import { AppProps } from "next/app";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { darkTheme } from "../styles/utils";
-import {Theme} from "../lib/types";
+import { Theme } from "../lib/types";
+import { MDXProvider } from "@mdx-js/react";
 
 import "../styles/fonts.css";
+import { Checkpoint } from "../components";
 
-
-const GlobalStyle = createGlobalStyle<{theme: Theme}>`
+const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
   *,
   *::before,
   *::after {
@@ -30,17 +31,20 @@ const GlobalStyle = createGlobalStyle<{theme: Theme}>`
     background-color: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.text};
   }
-  
-
-
 `;
+
+const components = {
+  li: Checkpoint,
+};
 
 function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <ThemeProvider theme={darkTheme}>
-        <GlobalStyle />
-        <Component {...pageProps} />
+        <MDXProvider components={components}>
+          <GlobalStyle />
+          <Component {...pageProps} />
+        </MDXProvider>
       </ThemeProvider>
     </>
   );
