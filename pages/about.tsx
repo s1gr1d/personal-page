@@ -49,6 +49,7 @@ import Image from "next/image";
 import { ArrowLinkDown } from "../components/arrowLinkDown";
 import { KnowledgeTabs } from "../components/about/knowledgeTabs";
 import { scrollToRef } from "../lib/scrollTo";
+import { about } from "../content/text";
 
 const TextWrapper = styled.div`
   grid-column: col 6 / col 10;
@@ -78,19 +79,11 @@ const AboutMe = () => {
         />
       </ImageWrapper>
       <TextWrapper>
-        <p>
-          {
-            'Hi, I’m Sigrid and welcome to my online portfolio! Let’s get straight to it. I laugh unmistakably loud. But I love to laugh and consider myself as a person with a lot of positive energy. Rumor has it that I’m a "greenie", but the truth is that I’m just trying to live more mindfully. Always on the mission to reduce my plastic waste you can find me in the nearest thrift store or buying biodegradable toothbrushes.'
-          }
-        </p>
+        <p>{about.P1}</p>
         <br />
-        <p>
-          {
-            "I love getting to know new places to such an extent that I could work as a train operator, considering all the hours I spent in there the last few years. Driven by curiosity I always use this time to learn something new by reading books and listening to my favourite podcasts."
-          }
-        </p>
+        <p>{about.P2}</p>
         <br />
-        <p>{"But all this is just a part of who I am."}</p>
+        <p>{about.P3}</p>
       </TextWrapper>
       <LeadingDownArrow href="#knowledge" onClick={scrollToRef("#knowledge")} />
     </StyledGrid>
