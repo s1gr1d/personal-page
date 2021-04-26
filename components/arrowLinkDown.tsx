@@ -78,7 +78,7 @@ export const ArrowLinkDown = ({
       className={className}
     >
       <div>
-        <svg viewBox="0 0 262 62">
+        <svg viewBox="0 0 262 63">
           <g>
             <line y1="30.33" y2="30.33" x1="110" x2="227.62" />
             <polyline points="217 18 228.12 30.34 217 42" />
