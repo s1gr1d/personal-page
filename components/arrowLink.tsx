@@ -62,6 +62,7 @@ const StyledDelayLink = styled(DelayLink)<{ variant: Variant }>`
   g polyline {
     fill: none;
     stroke-miterlimit: 10;
+    stroke: ${({ theme }) => theme.colors.text};
   }
   g circle {
     display: block;
