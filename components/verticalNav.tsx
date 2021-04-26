@@ -40,11 +40,11 @@ const StyledLink = styled.a<{ active: boolean }>`
     position: absolute;
     content: "";
     background: ${({ theme }) => theme.colors.accent};
-    mix-blend-mode: color-dodge;
-    width: calc(100%);
+    mix-blend-mode: color;
+    width: calc(100% + 10px);
     height: 0;
-    bottom: 0;
-    left: 0;
+    bottom: -2px;
+    left: -5px;
     transition: all 300ms ease-in-out;
     
   }
