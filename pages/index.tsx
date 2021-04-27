@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { IconLink } from '../components/iconLink';
-import { ArrowLink, Variant } from '../components/arrowLink';
 import { ArrowLinkDown } from '../components/arrowLinkDown';
 import { AiFillMediumCircle, AiFillGithub } from 'react-icons/ai';
 import React from 'react';
@@ -8,6 +7,7 @@ import { scrollToRef } from '../lib/scrollTo';
 import { KnowledgeTabs } from '../components/about/knowledgeTabs';
 import { AboutMe } from '../components/about/aboutMe';
 import { Header } from '../components/about/header';
+import { VerticalNav } from '../components/verticalNav';
 
 const Background = styled.div`
   height: 100vh;
@@ -23,9 +23,13 @@ const Background = styled.div`
 `;
 
 const WelcomingText = styled.p`
-  font-size: 70px;
-  font-family: ${({ theme }) => theme.typography.primaryFont};
+  font-size: 10vh;
+  font-family: ${({ theme }) => theme.typography.secondaryFont};
+  text-transform: uppercase;
+  font-weight: 700;
   color: ${({ theme }) => theme.colors.text};
+  white-space: pre-line;
+  text-align: left;
 `;
 
 const CenteredWelcoming = styled.div`
@@ -34,33 +38,10 @@ const CenteredWelcoming = styled.div`
   text-align: center;
 `;
 
-const AboutMeLink = styled(ArrowLink)`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-
-  margin-left: 2em;
-  margin-bottom: 3em;
-
-  @media (max-width: 650px) {
-    margin-bottom: 8em;
-  }
-`;
-
-const MyWorkLink = styled(ArrowLink)`
-  grid-area: rightArrow;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-
-  margin-right: 2em;
-  margin-bottom: 3em;
-`;
-
 const LeadingDownArrow = styled(ArrowLinkDown)`
   grid-column: col 1 / col -1;
   justify-self: center;
-  
+
   & svg {
     width: 180%;
   }
@@ -85,17 +66,12 @@ const LinkWrapper = styled.div`
 const Index = () => {
   return (
     <>
+      <VerticalNav />
       <Background>
         <CenteredWelcoming>
-          <WelcomingText>{'hello, i am sigrid'}</WelcomingText>
+          <WelcomingText>{'hello, \n i am sigrid'}</WelcomingText>
           <LeadingDownArrow href="#aboutme" onClick={scrollToRef('#aboutme')} />
         </CenteredWelcoming>
-        <AboutMeLink href="/about" variant={Variant.LEFT}>
-          {'me and my journey'}
-        </AboutMeLink>
-        <MyWorkLink href="/work" variant={Variant.RIGHT}>
-          {'my work'}
-        </MyWorkLink>
         <LinkWrapper>
           <IconLink url={'https://github.com/s1gr1d'} icon={AiFillGithub}>
             {'GitHub'}
