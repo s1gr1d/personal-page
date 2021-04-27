@@ -17,7 +17,7 @@ const StyledList = styled.ul`
   color: white;
 `;
 
-const StyledLink = styled.a<{ active: boolean }>`
+const StyledLink = styled.a<{ active?: boolean }>`
   font-family: ${({ theme }) => theme.typography.secondaryFont};
   display: block;
   position: relative;
