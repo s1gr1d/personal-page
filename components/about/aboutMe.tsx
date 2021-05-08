@@ -24,7 +24,7 @@ const LeadingDownArrow = styled(ArrowLinkDown)`
   grid-column: col 1 / col -1;
   justify-self: center;
 
-  margin: 40px 0;
+  margin: 110px;
 `;
 
 export const AboutMe = () => {

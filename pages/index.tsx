@@ -4,10 +4,11 @@ import { ArrowLinkDown } from '../components/arrowLinkDown';
 import { AiFillMediumCircle, AiFillGithub } from 'react-icons/ai';
 import React from 'react';
 import { scrollToRef } from '../lib/scrollTo';
-import { KnowledgeTabs } from '../components/about/knowledgeTabs';
 import { AboutMe } from '../components/about/aboutMe';
 import { Header } from '../components/about/header';
 import { VerticalNav } from '../components/verticalNav';
+import { Skills } from '../components/about/skills';
+import { WorkExperience } from '../components/about/workExperience';
 
 const Background = styled.div`
   height: 100vh;
@@ -83,7 +84,8 @@ const Index = () => {
       </Background>
       <Header id={'aboutme'} />
       <AboutMe />
-      <KnowledgeTabs />
+      <Skills />
+      <WorkExperience />
     </>
   );
 };

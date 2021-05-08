@@ -11,9 +11,9 @@ export const BodyText = ({ text }: BodyTextProps) => {
           <p>
             {paragraph.map((snippet: TextType, key) =>
               snippet.type === 'strong' ? (
-                <b key={`bold-${snippet.content.length}-${key}`}>{snippet.content}</b>
+                <b key={`bold-${snippet.content.length}-${key}`}>{snippet.content} </b>
               ) : (
-                <span key={`text-${snippet.content.length}-${key}`}>{snippet.content}</span>
+                <span key={`text-${snippet.content.length}-${key}`}>{snippet.content} </span>
               ),
             )}
           </p>
