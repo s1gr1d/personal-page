@@ -1,7 +1,7 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import { ComponentUtilProps } from "../lib/types";
-import { IconType } from "react-icons";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import { ComponentUtilProps } from '../lib/types';
+import { IconType } from 'react-icons';
 
 const showLinkText = css`
   visibility: visible;
@@ -34,13 +34,13 @@ const Link = styled.a`
 `;
 
 const Text = styled.p`
-  font-family: "Poppins", sans-serif;
   font-style: normal;
-  /* font-size: L;*/
-  font-weight: 400;
-  text-transform: lowercase;
   text-decoration: none;
-  letter-spacing: 1.5px;
+  letter-spacing: 0.7px;
+  font-family: ${({ theme }) => theme.typography.secondaryFont};
+  font-size: ${({ theme }) => theme.typography.fontSize3};
+  color: ${({ theme }) => theme.colors.text};
+  font-weight: 600;
 
   ${hideLinkText};
   transition: clip-path 275ms ease;
@@ -54,7 +54,7 @@ const IconWrapper = styled.div`
     width: 100%;
   }
 
-  height: 2em;
+  height: 2rem;
 `;
 
 type IconLinkProps = ComponentUtilProps & {
@@ -63,12 +63,7 @@ type IconLinkProps = ComponentUtilProps & {
   url: string;
 };
 
-export const IconLink = ({
-  children,
-  icon: Icon,
-  url,
-  className,
-}: IconLinkProps) => {
+export const IconLink = ({ children, icon: Icon, url, className }: IconLinkProps) => {
   return (
     <Link href={url} target="_blank" className={className}>
       <Text>{children}</Text>
